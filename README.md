@@ -60,6 +60,24 @@
 
 ---
 
+## ⚡ 快速开始(5 分钟上手)
+
+1. **装**:把 README「交给 Agent 安装」的提示词发给任意 AI 助手,或手动装入
+   profile(详见 [docs/INSTALL.md](docs/INSTALL.md));
+2. **配**:把「交给 Agent 配置」的提示词发过去,或自己改
+   `$DSH_HOME/settings.yaml` 的 `tool-vision` 段(端点见 [docs/presets.md](docs/presets.md));
+3. **用**:
+   - 粘贴一张图 → 对话里出现 `[图片: 路径]` 短标记 + 气泡内联缩略图;
+   - 问模型「图里是什么」→ 模型自动调用 `inspect_image` 看图回答;
+   - 需要像素级操作 → 让模型用 `vision_ocr`(读字)/ `vision_colors`(取色)/
+     `vision_ground`(定位)/ `vision_crop`(裁剪)……(全部工具见
+     [docs/examples.md](docs/examples.md));
+   - 拖 PDF/Word 进来 → `file-drop` 直接换成路径给模型。
+
+> 全部设置热加载,通常无需重启;只有**安装/升级代码后**才需要重启 dsh。
+
+---
+
 ## 📸 效果一览
 
 ![视觉工具颜色识别](screenshots/vision-colors-result.png)
