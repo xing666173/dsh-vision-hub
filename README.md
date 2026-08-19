@@ -88,6 +88,64 @@ dsh plugin add xing666173/dsh-file-drop
 > 依赖:视觉工具箱需要 `sharp` / `potrace` / `puppeteer-core`(缺失时工具
 > 自动降级并提示安装命令,不影响其他工具)。
 
+### 🤖 交给 Agent 安装(复制即用)
+
+大多数人都是让 agent 帮忙装——把下面这段提示词直接发给你的 agent 即可
+(在 DSH 对话里、或任意能执行命令的 AI 助手都行):
+
+```text
+请帮我安装 dsh-vision-hub 视觉全家桶(https://github.com/xing666173/dsh-vision-hub),
+包含三个组件:增强版 dsh-tool-vision(视觉工具箱)、dsh-bridge-preview(桥接内联预览)、
+dsh-file-drop(拖拽文件上传)。
+
+安装步骤:
+1. 把仓库克隆或下载到本地,或者直接按子目录取文件:
+   - tool-vision/ → 增强版 dsh-tool-vision(覆盖我当前的内置/已安装版本)
+   - bridge-preview/ → 桥接内联预览插件
+   - file-drop/ → 拖拽上传插件
+2. 三个组件都安装到我的 DSH profile(默认 web-desktop):
+   - 视觉工具箱:dsh-tool-vision 需要正确的 package.json(name=dsh-tool-vision)、
+     lib/ 目录、vendor/ 目录、cordis.patch.yml;依赖 sharp/potrace/puppeteer-core/
+     @deepseek-ai/schemastery 需要装进 profile 的 node_modules(或保证可解析)。
+   - bridge-preview 与 file-drop:按各自包结构安装并挂载。
+3. 在 profile 的 cordis.patch.yml 中确认三个插件的挂载行存在(或按包内
+   cordis.patch.yml 自动挂载)。
+4. 如果我的桌面是 EAC(内置插件机制),请同步到
+   resources/app/assets/plugins/ 对应目录,保证重启后不被覆盖。
+5. 完成后提示我重启 dsh。
+
+不要修改任何设置项,安装完即可。
+```
+
+### 🤖 交给 Agent 配置(复制即用)
+
+安装完成后,把这段发给 agent 帮你配好视觉端点(把 `YOUR_API_KEY`
+换成你的密钥;没有密钥就问我要):
+
+```text
+请帮我配置 dsh-vision-hub 的视觉模型(保持 EAC 原生设置,不要新增设置页):
+
+1. 在 $DSH_HOME/settings.yaml 的 tool-vision 段写入(没有该段就创建):
+   tool-vision:
+     baseURL: https://open.bigmodel.cn/api/paas/v4
+     model: glm-4v-flash
+     maxTokens: 1024
+     apiKeyEnv: GLM_API_KEY
+     apiKey: YOUR_API_KEY
+     bridgeTextOnly: true
+     requestGuard: true
+2. 如果 profile 的 cordis.patch.yml 里有 tool-vision 挂载行,保持其
+   config 与上面一致(bridgeTextOnly/requestGuard)。
+3. 检查依赖 sharp/potrace/puppeteer-core 可被插件解析;缺失时安装并说明。
+4. 不要改动其他任何配置;改完告诉我是否需要重启。
+
+说明:全部设置热加载,通常无需重启;只有安装新代码时才需要重启 dsh。
+```
+
+> 💡 想换视觉端点?任意 OpenAI 兼容 `/chat/completions` 都行——改
+> `baseURL` + `model` + `apiKey` 三项即可(例如阿里百炼
+> `https://dashscope.aliyuncs.com/compatible-mode/v1` + `qwen3-vl-flash`)。
+
 ## ⚙️ 配置
 
 视觉工具箱的设置全部在 **EAC 原生设置页**(设置 → 视觉模型),12 项配置
