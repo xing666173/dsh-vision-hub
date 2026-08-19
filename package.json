@@ -1,0 +1,17 @@
+{
+  "name": "dsh-vision-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DeepSeek Harness EAC 视觉全家桶:像素级视觉工具(tool-vision 增强版)+ 桥接内联预览(bridge-preview)+ 拖拽文件上传(file-drop)",
+  "type": "module",
+  "workspaces": ["tool-vision", "bridge-preview", "file-drop"],
+  "scripts": {
+    "test": "cd tool-vision && npm test && node ../bridge-preview/test-regex.mjs && node ../bridge-preview/test-route.mjs",
+    "test:vision": "cd tool-vision && npm test",
+    "test:preview": "node bridge-preview/test-regex.mjs && node bridge-preview/test-route.mjs"
+  },
+  "engines": {
+    "node": ">=20.18"
+  },
+  "license": "MIT"
+}
