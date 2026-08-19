@@ -17,7 +17,10 @@
     稳定性与安全修复;
 - **bridge-preview 0.1.1**:桥接内联预览,图像加载后隐藏标记文本;
 - **file-drop 1.0.0**:拖拽上传非图片文件(PDF/Word/Excel/ZIP/文本);
-- 文档体系:docs/ 四篇(增强说明/适配性/设置项/EAC 适配度)+ FAQ + 端点预设。
+- **测试与 CI**:21 个工具测试 + 4 个 manifest 测试 + bridge-preview 正则/路由
+  测试;GitHub Actions(Node 22/24)自动运行;
+- **文档体系**:docs/ 十二篇(架构/示例/对比/增强/适配/设置/EAC/FAQ/安装/
+  预设/技巧/安全/迁移)+ 索引页 + 中英文 README + CHANGELOG。
 
 ### 变更
 
