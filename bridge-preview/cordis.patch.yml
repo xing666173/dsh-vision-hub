@@ -1,0 +1,4 @@
+# dsh-bridge-preview bundle patch:挂载一行,加入 profile 树。
+- insert:
+    - id: dsh-bridge-preview
+      name: 'dsh-bridge-preview'

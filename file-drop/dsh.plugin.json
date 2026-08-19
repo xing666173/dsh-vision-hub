@@ -1,0 +1,15 @@
+{
+  "name": "dsh-file-drop",
+  "description": "拖拽非图片文件：桌面壳直取原始路径 / 拖拽自带路径直取 / 普通文件上传到工作区换取路径",
+  "version": "1.0.0",
+  "entry": {
+    "name": "dsh-file-drop",
+    "inject": [
+      "webServer",
+      "sessions"
+    ]
+  },
+  "client": {
+    "platform": "web"
+  }
+}

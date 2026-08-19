@@ -1,0 +1,5 @@
+# dsh-file-drop：拖拽非图片文件（桌面壳直取原始路径 / 上传兜底）
+- insert:
+    - id: dsh-file-drop
+      name: dsh-file-drop
+      inject: [webServer, sessions]
