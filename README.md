@@ -35,7 +35,7 @@
 | `vision_present` | 把生成/导出的图片正式展示给用户 |
 | `vision_materialize` | 附件落盘成真实文件路径 |
 
-**增强版相对上游的诚意**(详见 [`docs-zh.md`](docs-zh.md)):
+**增强版相对上游的诚意**(详见 [`docs/ENHANCEMENTS.md`](docs/ENHANCEMENTS.md)):
 
 - ✨ **对话干净**:桥接标记从一大段指令瘦身为 `[图片: 路径]`,使用规则下沉到
   系统提示层,模型照读、界面不脏;
@@ -158,7 +158,7 @@ tool-vision:
   apiKey: sk-xxxx                                   # 你的密钥
 ```
 
-更多细节见 [`docs-zh.md`](docs-zh.md)(新增与修改、适配性、EAC 平台适配度)。
+更多细节见 [`docs/ENHANCEMENTS.md`](docs/ENHANCEMENTS.md)(新增与修改、适配性、EAC 平台适配度)。
 
 ---
 
