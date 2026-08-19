@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c448adde47 # v4.2.0
         with:
           node-version: ${{ matrix.node }}
+      - name: Run repo manifest / structure tests
+        run: node --test tests/manifest.test.js
       - name: Install tool-vision dependencies
         working-directory: tool-vision
         run: npm install --no-audit --no-fund --ignore-scripts

@@ -176,7 +176,7 @@ tool-vision:
   apiKey: sk-xxxx                                   # 你的密钥
 ```
 
-更多细节见 [`docs/ENHANCEMENTS.md`](docs/ENHANCEMENTS.md)(新增与修改、适配性、EAC 平台适配度)。
+更多细节见 [`docs/ENHANCEMENTS.md`](docs/ENHANCEMENTS.md)(新增与修改、适配性、EAC 平台适配度)与 [`docs/COMPARISON.md`](docs/COMPARISON.md)(与上游对比)。另有 [README.en.md](README.en.md) 英文版。
 
 ---
 
