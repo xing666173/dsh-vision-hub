@@ -24,6 +24,12 @@ jobs:
       - name: Install tool-vision dependencies
         working-directory: tool-vision
         run: npm install --no-audit --no-fund --ignore-scripts
-      - name: Run tool-vision tests
+      - name: Run tool-vision tests (21 cases)
         working-directory: tool-vision
         run: npm test
+      - name: Run bridge-preview regex tests
+        working-directory: bridge-preview
+        run: node test-regex.mjs
+      - name: Run bridge-preview route tests
+        working-directory: bridge-preview
+        run: node test-route.mjs
