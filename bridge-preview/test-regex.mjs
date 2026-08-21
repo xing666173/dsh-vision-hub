@@ -1,7 +1,7 @@
 // 正则提取回归测试:验证 HINT_RE 对 tool-vision 桥接提示文本的提取行为
 import { readFile } from 'node:fs/promises'
 
-const HINT_RE = /exported to:\s*("[^"]+"|'[^']+'|[A-Za-z]:[\\/][^\s\]]+?\.(?:png|jpe?g|webp|gif|avif|bmp))/gi
+const HINT_RE = /(?:exported to:\s*|\[图片:\s*|\[image:\s*)("[^"]+"|'[^']+'|[A-Za-z]:[\\/][^\s\]]+?\.(?:png|jpe?g|webp|gif|avif|bmp))/gi
 
 const samples = [
   // 0.3.10 格式(单图):exported to 出现一次
@@ -12,6 +12,10 @@ const samples = [
   '[User sent an image (a.png), exported to: C:\\Temp\\v\\a.png. Inspect it with the inspect_image tool to see its content.]\n[User sent an image (b.jpg), exported to: C:\\Temp\\v\\b.jpg. Inspect it with the inspect_image tool to see its content.]',
   // 用户附带提问文字
   '[User sent an image (image.png), exported to: C:\\Temp\\x.png. Inspect it with the inspect_image tool to see its content.]这个是什么',
+  // 新格式单图标记
+  '[图片: C:\\Users\\axezt\\AppData\\Local\\Temp\\dsh-vision-bridge\\image_sha256:23c41.png]',
+  // 新格式双图标记
+  '[图片: C:\\Temp\\v\\a.png][图片: C:\\Temp\\v\\b.jpg]',
 ]
 
 function extractPaths(text) {
@@ -36,6 +40,8 @@ const expected = [
   ['C:\\Users\\axezt\\AppData\\Local\\Temp\\dsh-vision-bridge\\image_sha256:23c41.png'],
   ['C:\\Temp\\v\\a.png', 'C:\\Temp\\v\\b.jpg'],
   ['C:\\Temp\\x.png'],
+  ['C:\\Users\\axezt\\AppData\\Local\\Temp\\dsh-vision-bridge\\image_sha256:23c41.png'],
+  ['C:\\Temp\\v\\a.png', 'C:\\Temp\\v\\b.jpg'],
 ]
 
 let allOk = true
@@ -54,7 +60,7 @@ allOk = allOk && plainHits === 0
 
 // client.js 中实际使用的正则应与测试一致(防漂移)
 const client = await readFile(new URL('./client.js', import.meta.url), 'utf8')
-const inClient = client.includes('/exported to:\\s*("[^"]+"|\'[^\']+\'|[A-Za-z]:[\\\\/][^\\s\\]]+?\\.(?:png|jpe?g|webp|gif|avif|bmp))/gi')
+const inClient = client.includes('/(?:exported to:\\s*|\\[图片:\\s*|\\[image:\\s*)("[^"]+"|\'[^\']+\'|[A-Za-z]:[\\\\/][^\\s\\]]+?\\.(?:png|jpe?g|webp|gif|avif|bmp))/gi')
 console.log(`${inClient ? 'PASS' : 'FAIL'} | client.js HINT_RE in sync`)
 allOk = allOk && inClient
 
